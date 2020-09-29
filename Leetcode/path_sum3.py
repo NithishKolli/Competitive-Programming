@@ -6,6 +6,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 from copy import deepcopy
 class Solution:
     def __init__(self):
@@ -21,8 +22,7 @@ class Solution:
     
     def parseTree(self, root:TreeNode, sum_dict: dict, current_sum):
         '''
-            sum_dict - dictionary whose key is the sum of all the elements from
-             root to that node. Value is the number of such nodes.
+            sum_dict - dictionary whose key is the sum of all the elements from root to that node. Value is the number of such nodes.
         '''
         if not root: #end of our dfs path.
             return
@@ -36,9 +36,3 @@ class Solution:
             right_node_dict = deepcopy(sum_dict)
             right_node_dict[current_sum+root.val] += 1
             self.parseTree(root.right, right_node_dict, current_sum+root.val)
-            
-            
-            
-
-            
-# right_node_dict[current_sum+root.val] = right_node_dict.get(current_sum+root.val,0) + 1
