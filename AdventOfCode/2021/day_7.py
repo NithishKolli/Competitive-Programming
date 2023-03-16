@@ -5,7 +5,6 @@ from collections import Counter
 def get_equidistant_point(input):
     input.sort()
     counter_input = Counter(input)
-    print(counter_input)
     curr_distance = sum(input)
     curr_distance -= input[0]*len(input)
     least_distance = curr_distance
