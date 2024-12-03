@@ -38,3 +38,5 @@ class Solution {
         return "";
     }
 }
+
+// Queue can be used like a cyclical list by poll and offer on same val
