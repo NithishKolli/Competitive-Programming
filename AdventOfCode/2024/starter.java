@@ -6,7 +6,7 @@ import java.util.List;
 
 public class starter {
     public static void main(String[] args) {
-        // String filePath = "day6input.txt";
+        // Path filePath  = Paths.get("day6input.txt");
         Path filePath  = Paths.get("day6inputsample.txt");
         try {
             List<String> lines = Files.readAllLines(filePath);
