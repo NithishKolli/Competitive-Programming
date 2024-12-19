@@ -14,7 +14,9 @@ public class Day5 {
         // String filePath = "day5inputsample.txt";
         Map<Integer,Set<Integer>> map = new HashMap<>();
         Map<Integer,Set<Integer>> revMap = new HashMap<>();
+        List<String> wrongLines = new ArrayList<>();
         int answer = 0 ;
+        int answer2 = 0 ;
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -34,20 +36,17 @@ public class Day5 {
                     boolean flag=true;
                     for(int i=0;i<parts.length;i++){
                         for(int j=i+1;j<parts.length;j++){
-                            if(map.containsKey(Integer.parseInt(parts[i]))) {
-                                if(!map.get(Integer.parseInt(parts[i])).contains(Integer.parseInt(parts[j]))) {
-                                    flag=false;
-                                }
-                            } else if (map.containsKey(Integer.parseInt(parts[j]))) {
+                            if (map.containsKey(Integer.parseInt(parts[j]))) {
                                 if(map.get(Integer.parseInt(parts[j])).contains(Integer.parseInt(parts[i]))) {
                                     flag=false;
                                 }
                             }
-
                         }
                     }
                     if(flag){
                         answer+= Integer.parseInt(parts[(parts.length/2)]);
+                    } else {
+                        wrongLines.add(line);
                     }
                 } else {
                     continue;
@@ -56,6 +55,22 @@ public class Day5 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        for(String line: wrongLines) {
+            String[] parts = line.split(",");
+            for(int i=0;i<parts.length;i++){
+                for(int j=i+1;j<parts.length;j++){
+                    if (map.containsKey(Integer.parseInt(parts[j]))) {
+                        if(map.get(Integer.parseInt(parts[j])).contains(Integer.parseInt(parts[i]))) {
+                            String t = parts[j];
+                            parts[j] = parts[i];
+                            parts[i] = t;
+                        }
+                    }
+                }
+            }
+            answer2 += Integer.parseInt(parts[(parts.length/2)]);
+        }
         System.out.println(answer);
+        System.out.println(answer2);
     }
 }
