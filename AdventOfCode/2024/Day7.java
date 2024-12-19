@@ -9,7 +9,7 @@ public class Day7 {
         Path filePath  = Paths.get("day7input.txt");
         // Path filePath  = Paths.get("day7inputsample.txt");
         long answer = 0;
-        int count =0;
+        long answer2 = 0;
         try {
             List<String> lines = Files.readAllLines(filePath);
             for (String line : lines) {
@@ -17,16 +17,17 @@ public class Day7 {
                 long target = Long.parseLong(parts[0]);
                 String[] numbers = parts[1].substring(1).split(" ");
                 if(checkTarget(target, numbers, Long.parseLong(numbers[0]),0)){
-                    // System.out.println(target);
-                    count++;
                     answer += target;
+                }
+                if(checkTarget2(target, numbers, Long.parseLong(numbers[0]),0)){
+                    answer2 += target;
                 }
             }
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
         }
-        System.out.println(count);
         System.out.println(answer);
+        System.out.println(answer2);
     }
 
     private static boolean checkTarget(long target, String[] numbers, long value, int index){
@@ -54,10 +55,13 @@ public class Day7 {
         if(index==numbers.length-1) {
             return value==target;
         }
-        if(checkTarget(target, numbers, value + Long.parseLong(numbers[index+1]), index+1)) {
+        if(checkTarget2(target, numbers, value + Long.parseLong(numbers[index+1]), index+1)) {
             return true;
         }
-        if(checkTarget(target, numbers, value * Long.parseLong(numbers[index+1]), index+1)) {
+        if(checkTarget2(target, numbers, value * Long.parseLong(numbers[index+1]), index+1)) {
+            return true;
+        }
+        if(checkTarget2(target, numbers, Long.parseLong(value  + numbers[index+1]), index+1)) {
             return true;
         }
         return false;
