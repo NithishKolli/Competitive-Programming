@@ -62,6 +62,7 @@ public class Day10 {
                 }
             }
         }
-        return set.size();
+        // return set.size();
+        return score;
     }
 }
